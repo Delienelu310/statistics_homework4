@@ -9,8 +9,8 @@ function App() {
   return (
 
     <div className="App">
-      {/* <Exercise1 nValues={[100,1000,10000]}/> */}
-      {/* <Exercise2 nValues={[5, 10, 15, 20, 25, 30, 100]} repeats={100000}/> */}
+      <Exercise1 nValues={[100,1000,10000]}/>
+      <Exercise2 nValues={[5, 10, 15, 20, 25, 30, 100]} repeats={100000}/>
       <Exercise3 nValues={[100, 1000, 10000]} k={5000}/>
     </div>
   );

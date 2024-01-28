@@ -1,0 +1,67 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
+
+public class App {
+
+    private long state;
+    private final long a;
+    private final long c;
+    private final long m;
+
+    public void writeBitsToFile(String filename, int[] bits) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            for (int bit : bits) {
+                writer.append(Integer.toString(bit));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public App(long seed, long a, long c, long m) {
+        this.state = seed;
+        this.a = a;
+        this.c = c;
+        this.m = m;
+    }
+
+    public long generate() {
+        state = (a * state + c) % m;
+        return state;
+    }
+
+    public int generateBit() {
+        return (int) (generate() & 1);
+    }
+
+    public int[] generateBits(int numBits) {
+        int[] bits = new int[numBits];
+        for (int i = 0; i < numBits; i++) {
+            bits[i] = generateBit();
+        }
+        return bits;
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        long seedValue = 42;
+        App lcg = new App(seedValue, 1664525, 1013904223, (long) Math.pow(2, 32));
+
+        for(int i = 0; i < 1; i++){
+            lcg.writeBitsToFile("a.txt", lcg.generateBits(1000000));
+        }
+
+        Random random = new Random();
+
+        // Generate 10 random bits
+        for(int j = 0; j < 1; j++){
+            int[] randomBits = new int[1000000];
+            for (int i = 0; i < 1000000; i++) {
+                randomBits[i] = random.nextInt(2); // Generates 0 or 1
+            }
+            lcg.writeBitsToFile("b.txt", randomBits);
+        }
+        
+    }
+}
