@@ -1,15 +1,15 @@
 
 // calculate E(x) for Bin(n,p) X argument
-export function calculateEX(n, p){
+function calculateEX(n, p){
     return n * p;
 }
 
 // calculate Var(x) for Bin(n,p) X argument
-export function calculateVARX(n, p){
+function calculateVARX(n, p){
     return (n * p * (1 - p));
 }
 
-export function calculatePX(n, k, p){
+function calculatePX(n, k, p){
 
     let current = 1; 
     for(let i = 1; i <= k; i++){
